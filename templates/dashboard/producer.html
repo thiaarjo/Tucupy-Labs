@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Dashboard - Produtor · EcoTrade{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold text-gray-900 mb-8">📊 Meu Dashboard - Produtor</h1>
+    
+    <!-- Estatísticas -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200">
+            <div class="flex items-center">
+                <div class="p-3 rounded-full bg-green-100 text-green-600">
+                    🌿
+                </div>
+                <div class="ml-4">
+                    <p class="text-sm font-medium text-gray-600">Créditos Disponíveis</p>
+                    <p class="text-2xl font-bold text-gray-900">{{ available_credits }} tons</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200">
+            <div class="flex items-center">
+                <div class="p-3 rounded-full bg-blue-100 text-blue-600">
+                    💰
+                </div>
+                <div class="ml-4">
+                    <p class="text-sm font-medium text-gray-600">À Venda</p>
+                    <p class="text-2xl font-bold text-gray-900">{{ listed_credits }} tons</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200">
+            <div class="flex items-center">
+                <div class="p-3 rounded-full bg-purple-100 text-purple-600">
+                    ✅
+                </div>
+                <div class="ml-4">
+                    <p class="text-sm font-medium text-gray-600">Vendidos</p>
+                    <p class="text-2xl font-bold text-gray-900">{{ sold_credits }} tons</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200">
+            <div class="flex items-center">
+                <div class="p-3 rounded-full bg-orange-100 text-orange-600">
+                    📈
+                </div>
+                <div class="ml-4">
+                    <p class="text-sm font-medium text-gray-600">Total</p>
+                    <p class="text-2xl font-bold text-gray-900">{{ total_credits }} tons</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vendas Recentes -->
+    <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200">
+        <h2 class="text-xl font-semibold text-gray-900 mb-4">🕒 Vendas Recentes</h2>
+        
+        {% if recent_sales %}
+            <div class="space-y-4">
+                {% for sale in recent_sales %}
+                <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                    <div>
+                        <p class="font-medium text-gray-900">Venda #{{ sale.id }}</p>
+                        <p class="text-sm text-gray-600">{{ sale.amount }} tons · {{ sale.timestamp|date:"d/m/Y H:i" }}</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-bold text-green-600">R$ {{ sale.total_price }}</p>
+                        <p class="text-sm text-gray-600">{{ sale.status }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-gray-600 text-center py-8">Nenhuma venda realizada ainda.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

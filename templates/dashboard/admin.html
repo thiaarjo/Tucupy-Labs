@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Dashboard - Admin · EcoTrade{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold text-gray-900 mb-8">⚡ Dashboard - Administrador</h1>
+    
+    <!-- Estatísticas Gerais -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200">
+            <div class="flex items-center">
+                <div class="p-3 rounded-full bg-purple-100 text-purple-600">
+                    👥
+                </div>
+                <div class="ml-4">
+                    <p class="text-sm font-medium text-gray-600">Total de Usuários</p>
+                    <p class="text-2xl font-bold text-gray-900">{{ total_users }}</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200">
+            <div class="flex items-center">
+                <div class="p-3 rounded-full bg-green-100 text-green-600">
+                    💰
+                </div>
+                <div class="ml-4">
+                    <p class="text-sm font-medium text-gray-600">Transações</p>
+                    <p class="text-2xl font-bold text-gray-900">{{ total_transactions }}</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200">
+            <div class="flex items-center">
+                <div class="p-3 rounded-full bg-blue-100 text-blue-600">
+                    🌿
+                </div>
+                <div class="ml-4">
+                    <p class="text-sm font-medium text-gray-600">Créditos Gerados</p>
+                    <p class="text-2xl font-bold text-gray-900">{{ total_credits }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ações Rápidas -->
+    <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 mb-8">
+        <h2 class="text-xl font-semibold text-gray-900 mb-4">🚀 Ações Rápidas</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <a href="/admin/accounts/user/" class="btn-primary text-center block">
+                Gerenciar Usuários
+            </a>
+            <a href="/admin/credits/carboncredit/" class="btn-secondary text-center block">
+                Ver Créditos
+            </a>
+            <a href="/admin/transactions/transaction/" class="btn-primary text-center block">
+                Ver Transações
+            </a>
+            <a href="/admin/" class="btn-secondary text-center block">
+                Painel Admin
+            </a>
+        </div>
+    </div>
+
+    <!-- Estatísticas Detalhadas -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Usuários por Tipo -->
+        <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">📊 Usuários por Tipo</h3>
+            <div class="space-y-3">
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-600">Produtores</span>
+                    <span class="font-bold text-gray-900">{{ total_users }}</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-600">Empresas</span>
+                    <span class="font-bold text-gray-900">{{ total_users }}</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-600">Administradores</span>
+                    <span class="font-bold text-gray-900">1</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status do Sistema -->
+        <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">🔧 Status do Sistema</h3>
+            <div class="space-y-3">
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-600">Servidor</span>
+                    <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Online</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-600">Banco de Dados</span>
+                    <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Ativo</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-600">Última Atualização</span>
+                    <span class="text-sm text-gray-900">Agora</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

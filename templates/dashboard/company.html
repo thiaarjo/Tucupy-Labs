@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Dashboard - Empresa · EcoTrade{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold text-gray-900 mb-8">🏢 Dashboard - Empresa</h1>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200">
+            <div class="flex items-center">
+                <div class="p-3 rounded-full bg-blue-100 text-blue-600">
+                    🌿
+                </div>
+                <div class="ml-4">
+                    <p class="text-sm font-medium text-gray-600">Créditos Comprados</p>
+                    <p class="text-2xl font-bold text-gray-900">{{ purchased_credits }}</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200">
+            <div class="flex items-center">
+                <div class="p-3 rounded-full bg-green-100 text-green-600">
+                    💰
+                </div>
+                <div class="ml-4">
+                    <p class="text-sm font-medium text-gray-600">Investimento Total</p>
+                    <p class="text-2xl font-bold text-gray-900">R$ {{ total_investment|default:"0" }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200">
+        <h2 class="text-xl font-semibold text-gray-900 mb-4">🛒 Compras Recentes</h2>
+        
+        {% if recent_purchases %}
+            <div class="space-y-4">
+                {% for purchase in recent_purchases %}
+                <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                    <div>
+                        <p class="font-medium text-gray-900">Compra #{{ purchase.id }}</p>
+                        <p class="text-sm text-gray-600">{{ purchase.amount }} tons · {{ purchase.timestamp|date:"d/m/Y H:i" }}</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-bold text-blue-600">R$ {{ purchase.total_price }}</p>
+                        <p class="text-sm text-gray-600">Vendedor: {{ purchase.seller.username }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-gray-600 text-center py-8">Nenhuma compra realizada ainda.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
